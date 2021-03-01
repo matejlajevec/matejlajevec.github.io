@@ -3,27 +3,39 @@ var vprasanja = [];
 var ime, mail;
 var resentest = "";
 
-function getRandomInt(max){
-	return Math.floor(Math.random() * Math.floor(max));
-};
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+  }
 
 var seznam_vprasanj = [
-	['Voznik avtobusa opazi, da se bo na semaforju prižgala rdeča luč. Zavirati začne pri hitrosti #a# km/h in zavira #b# s preden se ustavi. Izračunaj velikost pospeška.', '#a#/3.6 * 1/#b#'],
-	['Raketa se po startu giblje s pospeškom #a# m/s². Kolikšno hitrost ima po #b# s gibanja? Izrazi v km/h.', '#a#*3.6 * #b#'],
-	['Avtomobil s hitrostjo #a# m/s zaleti v oviro in se ustavi. Trk z oviro traja #b# s. Predpostavimo, da je to gibanje enakomerno pospešeno. S kolikšnim negativnim pospeškom se avto ustavlja?', '-#a# / #b#'],
-	['Telo začne pri hitrosti #a# m/s enakomerno pospeševati do hitrosti #b# m/s. Pospeševanje traja #c# s. Izračunaj povprečno hitrost.', '(#a#+#b#) / #c#'],
-	['Tovornjak vozi s hitrostjo #a# km/h. V nekem trenutku začne enakomerno pospešeno zavirati. Po #b# m se ustavi. Koliko časa se ustavlja?', '(7.2*#b#)/#a#'],
+	['Voznik avtobusa opazi, da se bo na semaforju prižgala rdeča luč. Zavirati začne pri hitrosti #h# km/h in zavira #b# s preden se ustavi. Izračunaj velikost pospeška.', '#h#/3.6 * 1/#b#'],
+	['Raketa se po startu giblje s pospeškom #e# m/s². Kolikšno hitrost ima po #b# s gibanja? Izrazi v km/h.', '#e#*#b# * 1/3.6'],
+	['Avtomobil s hitrostjo #c# m/s zaleti v oviro in se ustavi. Trk z oviro traja #a# s. Predpostavimo, da je to gibanje enakomerno pospešeno. S kolikšnim negativnim pospeškom se avto ustavlja?', '-#c# / #a#'],
+	['Telo začne pri hitrosti #d# m/s enakomerno pospeševati do hitrosti #g# m/s. Pospeševanje traja #a# s. Izračunaj povprečno hitrost.', '(#d#+#g#) / 2	'],
+	['Tovornjak vozi s hitrostjo #f# km/h. V nekem trenutku začne enakomerno pospešeno zavirati. Po #o# m se ustavi. Koliko časa se ustavlja?', '(7.2*#o#)/#f#'],
 ];
 
 function generirajVprasanje(i){
 	vprasanje = seznam_vprasanj[i][0];
 	enacba = seznam_vprasanj[i][1];
-	a = getRandomInt(100);
-	b = getRandomInt(100);
-	c = getRandomInt(100);
-	d = getRandomInt(100);
-	e = getRandomInt(100);
-	f = getRandomInt(100);
+	
+	a = getRandomInt(1, 10);
+	b = getRandomInt(10, 20);
+	c = getRandomInt(20, 30);
+	d = getRandomInt(30, 40);
+	e = getRandomInt(40, 50);
+	f = getRandomInt(50, 60);
+	g = getRandomInt(60, 70);
+	h = getRandomInt(70, 80);
+	i = getRandomInt(80, 90);
+	j = getRandomInt(90, 100);
+	k = getRandomInt(100, 110);
+	l = getRandomInt(110, 120);
+	m = getRandomInt(120, 130);
+	n = getRandomInt(130, 140);
+	o = getRandomInt(140, 150);
 	vprasanje = vprasanje.replace("#a#", String(a));
 	enacba = enacba.replace("#a#", String(a));
 	vprasanje = vprasanje.replace("#b#", String(b));
@@ -36,6 +48,24 @@ function generirajVprasanje(i){
 	enacba = enacba.replace("#e#", String(e));
 	vprasanje = vprasanje.replace("#f#", String(f));
 	enacba = enacba.replace("#f#", String(f));
+	vprasanje = vprasanje.replace("#g#", String(g));
+	enacba = enacba.replace("#g#", String(g));
+	vprasanje = vprasanje.replace("#h#", String(h));
+	enacba = enacba.replace("#h#", String(h));
+	vprasanje = vprasanje.replace("#i#", String(i));
+	enacba = enacba.replace("#i#", String(i));
+	vprasanje = vprasanje.replace("#j#", String(j));
+	enacba = enacba.replace("#j#", String(j));
+	vprasanje = vprasanje.replace("#k#", String(k));
+	enacba = enacba.replace("#k#", String(k));
+	vprasanje = vprasanje.replace("#l#", String(l));
+	enacba = enacba.replace("#l#", String(l));
+	vprasanje = vprasanje.replace("#m#", String(m));
+	enacba = enacba.replace("#m#", String(m));
+	vprasanje = vprasanje.replace("#n#", String(n));
+	enacba = enacba.replace("#n#", String(n));
+	vprasanje = vprasanje.replace("#o#", String(o));
+	enacba = enacba.replace("#o#", String(o));
 	rezultat = parseFloat(eval(enacba).toFixed(2));	
 	return [vprasanje, rezultat];
 }
@@ -53,7 +83,7 @@ function prikazVprasanja(){
 	test = _("test");
 	if (pos == 0){
 		test.innerHTML = "<h3 class='is-size-4'>Pozdravljen/a, vnesi svoje ime in priimek!</h3>";
-		test.innerHTML += "<h5 class='is-size-6	'>Vse odgovore zaokroži na dve decimalni mesti in zapiši le številsko vrednost odgovora v osnovnih enotah.</h2>"
+		test.innerHTML += "<h5 class='is-size-6	'>Vse odgovore zaokroži na dve decimalni mesti in zapiši le številsko vrednost odgovora v osnovnih enotah oz. v enotah, ki jih naloga zahteva.</h2>"
 		test.innerHTML += "<input type = 'text' class='is-size-3' class='mx=10' id = 'ime' >";
 		test.innerHTML += "<button onclick='shraniIme()' class=' mr-3 button is-normall button is-black'>Potrdi izbiro</button>";	
 		return;
@@ -69,10 +99,10 @@ function prikazVprasanja(){
 	_("test_status").innerHTML = "Vprašanje "+ pos +" od " + seznam_vprasanj.length;
 	vprasanje = vprasanja[pos][0];
 	test.innerHTML = "<h3 class='is-size-4'>" + vprasanje + "</h3>";	
-	test.innerHTML += "<input type = 'number' class='is-size-3' class='mx=10' id = 'vnos' >";
+	test.innerHTML += "<input type = 'text' class='is-size-3' class='mx=10' id = 'vnos' >";
 	test.innerHTML += "<button onclick='preveriOdgovor()' class=' mr-3 button is-normall button is-black'>Potrdi izbiro</button>";
 	resentest += String(pos)
-	resentest += ". "
+	resentest += ", "
 	resentest += vprasanje; 
 	resentest += "<br> Odgovor: "; 
 }
@@ -83,24 +113,26 @@ function shraniIme(){
 	prikazVprasanja();
 }
 
-function preveriOdgovor(){
-	var vnos = document.getElementById("vnos").value;
-	rezultat = vprasanja[pos][1]
-	if(vnos == rezultat){
-		pravilno++;
-		resentest += vnos; 
-		resentest += "	<b>Pravilno!</b> <br> <br>";
+	function preveriOdgovor(){
+		var vnos = document.getElementById("vnos").value;
+		vnos = parseFloat(vnos.replace(/,/g, '.'))
+		rezultat = vprasanja[pos][1]
+		if(vnos == rezultat){
+			pravilno++;
+			resentest += vnos; 
+			resentest += "	<b>Pravilno!</b> <br> <br>";
+		}
+		else{
+			resentest += vnos; 
+			resentest += "	<b>Napačno.</b>";
+			resentest += " Pravilen odgovor: ";
+			rezultat = rezultat.toLocaleString("pt-BR");
+			resentest += rezultat
+			resentest += "<br> <br>"
+		}
+		pos++;
+		prikazVprasanja();
 	}
-	else{
-		resentest += vnos; 
-		resentest += "	<b>Napačno.</b>";
-		resentest += " Pravilen odgovor: ";
-		resentest += rezultat
-		resentest += "<br> <br>"
-	}
-	pos++;
-	prikazVprasanja();
-}
 
 function posljiMail() { 
 	mail = document.getElementById("mail").value;
